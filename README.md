@@ -1,41 +1,24 @@
 # Advisory Accountability & Fault Diagnosis System
 ### AI-Powered Irrigation Advisory — DBMS Mini Project
 
-Three parts: PostgreSQL schema (`db/`), Express API backend (`backend/`), and a plain HTML/CSS/JS dashboard (`frontend/`).
+This project contains a PostgreSQL database schema, an Express API backend, and a web-based dashboard all in a single repository.
 
-## 1. Set up the database
+## 1. Database Setup
 
-Install PostgreSQL if you don't have it, then:
+Ensure PostgreSQL is installed on your system. Open your terminal in the project folder and run:
 
 ```bash
 createdb farm_advisory
-psql -d farm_advisory -f db/schema.sql
-```
+psql -d farm_advisory -f schema.sql
+This creates the required tables, triggers, stored procedures, and loads the initial seed data (10 plots) for the dashboard.
 
-This creates all tables, the trigger (`trg_flag_unreliable_advisories`), the stored
-procedure (`diagnose_yield_fault`), a summary view, and loads sample data so the
-dashboard isn't empty on first run.
+2. Backend Setup
+Make sure your .env file is created in the same folder and contains your PostgreSQL database credentials. Install the required Node packages and start the server:
 
-## 2. Set up the backend
-
-```bash
-cd backend
+Bash
 npm install
-cp .env.example .env
-```
-
-Edit `.env` and put in your actual PostgreSQL password. Then:
-
-```bash
 npm start
-```
+The Express API will run on http://localhost:4000. You can verify the connection at http://localhost:4000/api/health.
 
-Server runs on `http://localhost:4000`. Check it's alive at
-`http://localhost:4000/api/health`.
-
-## 3. Open the frontend
-
-Just open `frontend/index.html` directly in a browser (double-click it, or
-right-click → Open with browser). It talks to the backend at
-`localhost:4000` automatically — no build step needed.
-
+3. Frontend Dashboard
+Open the index.html file directly in any web browser (Chrome, Edge, Safari). It will automatically connect to the local backend API and render the live data, interactive map, and charts. No build steps or frontend servers are required.
